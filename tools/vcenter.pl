@@ -1,27 +1,36 @@
 #!/usr/bin/perl -w
-
-# version 1
+#
+# $Revision: 1.2 $
+#
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 # aligns a text vertically centered
 # no trailing empty lines are generated!
 
-$height = 4 unless ($height = shift());
+use strict;
 
-$file = "-" unless ($file = shift());
+my ($height, $file, @cache);
 
-if (($height eq "--help") || ($file eq "--help")) {
+$height =   4 unless ($height = shift);
+$file   = "-" unless ($file   = shift);
+
+if (($height eq "--help") or ($file eq "--help")) {
+
     print "Usage:\n";
     print "  vcenter.pl [height] [file1] [file2] [file3] [...]\n";
     print "This program will align a given text vertically centered\n";
-} else {
-    center_queue($file);
 
-    while($file = shift()) {
-	down_center($file);
-    }
-
-    center_flush();
+    exit 0;
 }
+
+die "height is not numeric!\n" unless $height =~ /^\+?\d*$/;
+
+center_queue($file);
+
+foreach $file (@ARGV) {
+    down_center($file);
+}
+
+center_flush();
 
 exit 0;
 
@@ -29,18 +38,17 @@ sub center_queue()
 {
     my $filename = $_[0];
     
-    open(FILE,"$filename") || die "can't read $filename\n";
+    open FILE, "$filename" or die "can't read \"$filename\": $!";
     
-    while ($line = <FILE>) {
-	push(@cache,$line);
+    while (my $line = <FILE>) {
+	push @cache, $line;
     }
     
-    close(FILE) || die "can't read $filename\n";
+    close FILE or die "can't read \"$filename\": $!";
 }
 
 sub center_flush()
 {
-
     while (@cache < $height) {
 	print "\n";
 	$height -=2;
@@ -49,6 +57,4 @@ sub center_flush()
     while (@cache) {
 	print shift(@cache);
     }
-
-    
 }
