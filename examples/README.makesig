@@ -1,5 +1,5 @@
 
-		  makesig.pl  v0.0.5  -  2000-11-10
+		  makesig.pl  v0.0.6  -  2000-11-12
 
 		 A random signature changer for those
 	    who don't fear the power of the command line.
@@ -92,10 +92,10 @@ It _is_ user-friendly.  It is not ignorant-friendly and
 idiot-friendly.            (Seen somewhere on the net.)
 
 beginconfig(
-# This is just a comment.
-maxlines=2
-footerfile=uptime|
-sigdashes=yes
+    # This is just a comment.
+    maxlines=2
+    footerfile=uptime|
+    sigdashes=yes
 )endconfig
 
 I cna tyep 400 Wrods pre miuet
@@ -120,16 +120,16 @@ files and uses another standard signature file:
 
 ###BEGIN###
 beginconfig(
-  fortunestyle=yes
-  maxlines=4
-  otherfile=/usr/share/fortune/fortunes
-  otherfile=/usr/share/fortune/fortunes2
+    fortunestyle=yes
+    maxlines=4
+    otherfile=/usr/share/fortune/fortunes
+    otherfile=/usr/share/fortune/fortunes2
 )endconfig
 
 beginconfig(
-  fortunestyle=no
-  maxlines=4
-  otherfile=/path/to/some.sigs
+    fortunestyle=no
+    maxlines=4
+    otherfile=/path/to/some.sigs
 )endconfig
 ####END####
 
