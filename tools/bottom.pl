@@ -1,51 +1,57 @@
 #!/usr/bin/perl -w
-
-# version 1
+#
+# $Id: bottom.pl,v 1.2 2000-10-13 16:34:42 mitch Exp $
+#
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 # aligns a text to the bottom
 
-$height = 4 unless ($height = shift());
+use strict;
 
-$file = "-" unless ($file = shift());
+my ($height, $file, @cache);
 
-if (($height eq "--help") || ($file eq "--help")) {
+$height =   4 unless ($height = shift);
+$file   = "-" unless ($file   = shift);
+
+if (($height eq "--help") or ($file eq "--help")) {
+
     print "Usage:\n";
     print "  bottom.pl [height] [file1] [file2] [file3] [...]\n";
     print "This program will align a given text to the bottom\n";
-} else {
-    down_queue($file);
 
-    while($file = shift()) {
-	down_queue($file);
-    }
+    exit 0;
 
-    down_flush();
 }
+
+die "height is not numeric!\n" unless $height =~ /^\+?\d*$/;
+
+down_queue($file);
+
+foreach $file (@ARGV) {
+    down_queue($file);
+}
+down_flush();
 
 exit 0;
 
 sub down_queue()
 {
     my $filename = $_[0];
+   
+    open FILE, "$filename" or die "can't read \"$filename\": $!";
     
-    open(FILE,"$filename") || die "can't read $filename\n";
-    
-    while ($line = <FILE>) {
-	push(@cache,$line);
+    while (my $line = <FILE>) {
+	push @cache, $line;
     }
     
-    close(FILE) || die "can't read $filename\n";
+    close FILE or die "can't read \"$filename\": $!";
 }
 
 sub down_flush()
 {
     while (@cache < $height) {
 	print "\n";
-	$height --;
+	$height--;
     }
 
-    while (@cache) {
-	print shift(@cache);
-    }
-
+    print @cache;
 }
