@@ -1,5 +1,5 @@
 
-		  makesig.pl  v0.0.2  -  2000-10-13
+		  makesig.pl  v0.0.3  -  2000-10-14
 
 		 A random signature changer for those
 	    who don't fear the power of the command line.
@@ -9,7 +9,9 @@
 
 	   http://www.h.shuttle.de/mitch/makesig_pl.en.html
 
+
 			       -- -- --
+
 
 The makesig.pl script will select a random signature from a signature
 file. A signature file consists of plain ascii text. The signatures
@@ -23,7 +25,9 @@ The example above will make makesig.pl read "foo.txt", then "bar.txt"
 and finally "foobar.txt". makesig.pl then randomly selects one of the
 signatures and prints it to stdout.
 
+
 			       -- -- --
+
 
 When a signature starts with the string "beginconfig(", makesig.pl
 looks for a configuration block. This block is ended with again with a
@@ -48,6 +52,13 @@ nolinefeed=<yes|no>     When set to yes, the final newline at the end
                         keep your signatures within the 4 lines
                         maximum.
 
+fortunestyle=<yes|no>   When set to yes, a single "%" instead of a
+                        blank line is used as a delimiter between
+                        signatures. This allows the use of fortune
+                        files. Using big fortune files can be rather
+                        slow (but that's the same with big 'ordinary'
+                        signature files).
+
 headerfile=<filename>   This file's contents will be prepended to the
                         chosen signature. This argument will be passed
                         to Perl's open() function, so given something
@@ -57,7 +68,14 @@ headerfile=<filename>   This file's contents will be prepended to the
 footerfile=<filename>   This file's contents will be appended to the
                         chosen signature. Again, Perl open() is used.
 
+Lines beginning with "#" are treated as comments.
+
+Executing "makesig.pl --help" will show a brief overview of the
+configuration commands.
+
+
 			       -- -- --
+
 
 This is an example signature file containing five signatures and a
 configuration block. Your current uptime will be added to the
@@ -74,6 +92,7 @@ It _is_ user-friendly.  It is not ignorant-friendly and
 idiot-friendly.            (Seen somewhere on the net.)
 
 beginconfig(
+# This is just a comment.
 maxlines=2
 footerfile=uptime|
 sigdashes=yes
@@ -91,3 +110,34 @@ on your Linux system.
 I found The Secret Of Monkey Island and all I got was this
 lousy T-Shirt!
 ####END####
+
+
+			       -- -- --
+
+
+This is just another example. It acts as a wrapper to some fortune
+files and uses another standard signature file:
+
+###BEGIN###
+beginconfig(
+  fortunestyle=yes
+  maxlines=4
+  otherfile=/usr/share/fortune/fortunes
+  otherfile=/usr/share/fortune/fortunes2
+)endconfig
+
+beginconfig(
+  fortunestyle=no
+  maxlines=4
+  otherfile=/path/to/some.sigs
+)endconfig
+####END####
+
+
+			       -- -- --
+
+
+				THANKS
+
+	       Scott T. Bowden <bowden@implausible.net>
+		  suggested the use of fortune files
