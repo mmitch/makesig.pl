@@ -1,20 +1,20 @@
 #!/usr/bin/perl -w
+#
+# $Revision: 1.2 $
+#
+# 2000 (C) by Christian Garbs <mitch@uni.de>
+#
 
 use strict;
 
-# 2000 (C) by Christian Garbs <mitch@uni.de>
-# torsten -> home
-
 # now this is the array config holding an anonymous hash as value [0]
-my @config = ({'maxlines',0,'sigdashes',0,'headerfile',"",'footerfile',"",'nolinefeed',1});
+my @config = ({'maxlines',0,'sigdashes',0,'headerfile',"",'footerfile',"",'nolinefeed',0});
 
 # nolinefeed entfernen -> extern!!!
 
 my @verweis=();
 my @quotes=();
 my $auswahl="";
-
-my $debug=0;
 
 my $homedir=$ENV{"HOME"};
 
@@ -71,9 +71,7 @@ sub read_file()
 	}
     }
     
-    debug("File: $filename");
     if (! $vorhanden) {
-	debug("File is new");
 
 	push(@visited,$filename);
 
@@ -82,18 +80,15 @@ sub read_file()
 	while (my $input = <FILE>) {
 	    if ($input =~ /^[\s\t]*beginconfig\(/i ) {
 		# Anfang Config
-		debug("Anfang Config");
 		$config_mode = 1;
 		$config_count ++;
 		foreach my $I ("sigdashes","maxlines","footerfile","headerfile","nolinefeed") {
 		    $config[$config_count]{$I} = $config[$current_config]{$I};
 		}
 		$current_config = $config_count;
-		debug("new config: $current_config");
 
 	    } elsif ($input =~ /^[\s\t]*\)endconfig/i ) {
 		# Ende Config
-		debug("Ende Config");
 
 		$config_mode = 0;
 		while (@subfiles) {
@@ -116,36 +111,29 @@ sub read_file()
 			} elsif ($cmd =~ /maxlines/i) {
 # Prüfung auf numerisch einbauen?
 			    $config[$current_config]{maxlines} = $val;
-			    debug("maxlines -> $val");
 			} elsif ($cmd =~ /sigdashes/i) {
 			    if (($val =~ /yes/i) || ($val == 1)) {
 				$config[$current_config]{sigdashes} = 1;
-				debug("sigdashes -> yes");
 			    } else {
 				$config[$current_config]{sigdashes} = 0;
-				debug("sigdashes -> no");
 			    }
 			} elsif ($cmd =~ /nolinefeed/i) {
 			    if (($val =~ /yes/i) || ($val == 1)) {
 				$config[$current_config]{nolinefeed} = 1;
-				debug("nolinefeed -> yes");
 			    } else {
 				$config[$current_config]{nolinefeed} = 0;
-				debug("nolinefeed -> no");
 			    }
 			} elsif ($cmd =~ /headerfile/i) {
 			    $config[$current_config]{headerfile} = $val;
-			    debug("headerfile -> $val");
 			} elsif ($cmd =~ /footerfile/i) {
 			    $config[$current_config]{footerfile} = $val;
-			    debug("footerfile -> $val");
 			}
 		    }
 		}
 	    } else {
 		# A Quote! or a newline?
 
-		if ($input !~ /^[\s\t]*$linebreak/) {
+		if ($input !~ /^\s*$/) {
 
 		    $newquote=$newquote . $input;
 		    $linecount ++;
@@ -157,9 +145,6 @@ sub read_file()
                         ($linecount <= $config[$current_config]{maxlines})) {
 			push(@verweis,$current_config);
 			push(@quotes,$newquote);
-			debug("quote added: $linecount lines");
-			debug("current max: $config[$current_config]{maxlines} lines");
-			debug("current config: $current_config");
 		    }
 
 		    $newquote="";
@@ -203,29 +188,29 @@ sub print_quote()
     my $ausgabe = "";
 
     if ($config[$verweis[$auswahl]]{sigdashes}) {
-	my $ausgabe = $ausgabe . "-- \n";
+	$ausgabe .= "-- \n";
     }
 
     if ($config[$verweis[$auswahl]]{headerfile}) {
 	open (HEADER, "$config[$verweis[$auswahl]]{headerfile}") || die "can't open $config[$verweis[$auswahl]]{headerfile}\n";
 	while (my $input = <HEADER>) {
-	    $ausgabe=$ausgabe . $input;
+	    $ausgabe .= $input;
 	}
 	close (HEADER) || die "can't close $config[$verweis[$auswahl]]{headerfile}\n";
     }
 
-    $ausgabe = $ausgabe . $quotes[$auswahl];
+    $ausgabe .= $quotes[$auswahl];
 
     if ($config[$verweis[$auswahl]]{footerfile}) {
 	open (FOOTER, "$config[$verweis[$auswahl]]{footerfile}") || die "can't open $config[$verweis[$auswahl]]{footerfile}\n";
 	while (my $input = <FOOTER>) {
-	    $ausgabe=$ausgabe . $input;
+	    $ausgabe .= $input;
 	}
 	close (FOOTER) || die "can't close $config[$verweis[$auswahl]]{footerfile}\n";
     }
 
     if ($config[$verweis[$auswahl]]{nolinefeed}) {
-	chomp ($ausgabe);
+	chomp $ausgabe;
     }
 
     print "$ausgabe";
@@ -238,18 +223,8 @@ sub print_quote()
 sub unwhite()
 {
     if (my $arg = $_[0]) {
-	$arg =~ s/^\t//g;
-	$arg =~ s/^\s//g;
-	$arg =~ s/\t$//g;
-	$arg =~ s/\s$//g;
+	$arg =~ s/^\s+//;
+	$arg =~ s/\s+$//;
 	return $arg;
     }
 }
-
-sub debug()
-{
-    if ($debug) {
-	print STDERR "$_[0]\n";
-    }
-}
-
