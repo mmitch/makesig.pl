@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.9 $
+# $Revision: 1.10 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 #
@@ -9,35 +9,22 @@
 #
 
 use strict;
+use Makesig::Configuration;
+use Makesig::File;
+use Makesig::Quote;
 
 # version information
-my $version = "0.0.4  -  2000-10-15";
+my $version = "0.1.0  -  2000-xx-yy  -  experimental branch";
 
-# now this is the array config holding an anonymous hash as value [0]
-my @config = ({
-    'maxlines'     =>  0,
-    'sigdashes'    =>  0,
-    'headerfile'   => "",
-    'footerfile'   => "",
-    'nolinefeed'   =>  0,
-    'fortunestyle' =>  0
-    });
-
-my @verweis=();
-my @quotes=();
-my $auswahl="";
+my @files = ();
 
 my $homedir=$ENV{"HOME"};
-
-my $config_count = 0;
 
 my $file="-";
 
 if (defined $ARGV[0]) {
     $file=shift;
 }
-
-my @visited=();
 
 if ($file eq "--help") {
 
@@ -62,7 +49,9 @@ EOF
 
 } else {
 
-    read_file($file,0);
+    my $file = File new();
+    $file->filename = $file;
+    $file->readAll();
 
     while ($file = shift) {
 	read_file($file,0);
