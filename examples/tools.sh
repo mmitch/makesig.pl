@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Revision: 1.3 $
+# $Revision: 1.4 $
 #
 # NOTE:
 # These examples want the tools to be present in the $PATH
@@ -48,7 +48,7 @@ overlay.pl background.txt demo.txt
 echo
 echo "Bottom right on a background:"
 
-bottom.pl < demo.txt \
+bottom.pl 6 < demo.txt \
 | right.pl \
 | overlay.pl - background.txt
 
@@ -120,5 +120,6 @@ overlay.pl \
 echo
 echo
 echo
-echo "If you can't read all of this at once, try \"./tools.sh|less\""
-echo "If you want to know how this is done, try \"less ./tools.sh\""
+echo ">>> If you can't read all of this at once, try \"./tools.sh | less\""
+echo ">>> If you want to know how this is done, try \"less ./tools.sh\""
+echo
