@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.4 $
+# $Revision: 1.4.4.1 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 # aligns a text to the bottom
@@ -10,6 +10,9 @@
 #
 
 use strict;
+
+sub down_queue($);
+sub down_flush();
 
 my ($height, $file, @cache);
 
@@ -37,9 +40,9 @@ down_flush();
 
 exit 0;
 
-sub down_queue()
+sub down_queue($)
 {
-    my $filename = $_[0];
+    my $filename = shift;
    
     open FILE, "$filename" or die "can't read \"$filename\": $!";
     

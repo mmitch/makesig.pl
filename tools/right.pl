@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.3 $
+# $Revision: 1.3.4.1 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 # aligns a text to the right
@@ -10,6 +10,8 @@
 #
 
 use strict;
+
+sub right($);
 
 my ($width, $file);
 
@@ -28,17 +30,17 @@ if (($width eq "--help") or ($file eq "--help")) {
 
 die "width is not numeric!\n" unless $width =~ /^\+?\d*$/;
 
-center($file);
+right($file);
 
 foreach $file (@ARGV) {
-    center($file);
+    right($file);
 }
 
 exit 0;
 
-sub center()
+sub right($)
 {
-    my $filename = $_[0];
+    my $filename = shift;
     
     open FILE, "$filename" or die "can't read \"$filename\": $!";
     

@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.3 $
+# $Revision: 1.3.4.1 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 # overlays multiple text files
@@ -10,6 +10,9 @@
 #
 
 use strict;
+
+sub overlay_queue($);
+sub overlay_flush();
 
 my ($file, @buffer);
 
@@ -34,9 +37,9 @@ overlay_flush();
 
 exit 0;
 
-sub overlay_queue()
+sub overlay_queue($)
 {
-    my $filename = $_[0];
+    my $filename = shift;
     
     open FILE, "$filename" or die "can't read \"$filename\": $!";
 

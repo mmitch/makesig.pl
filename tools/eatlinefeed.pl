@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.3.4.1 $
+# $Revision: 1.3.4.2 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 # this script removes the final linefeed
@@ -10,6 +10,8 @@
 #
 
 use strict;
+
+sub eatit($);
 
 my ($file, $lastline);
 
@@ -36,9 +38,9 @@ if ($lastline) {
 
 exit 0;
 
-sub eatit()
+sub eatit($)
 {
-    my $filename = $_[0];
+    my $filename = shift;
     
     open FILE, "$filename" or die "can't read \"$filename\": $!";
 

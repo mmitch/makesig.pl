@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.3 $
+# $Revision: 1.3.4.1 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 # centers a block horizontally
@@ -10,6 +10,9 @@
 #
 
 use strict;
+
+sub input($);
+sub left();
 
 my ($file, @data, $cutoff);
 
@@ -37,7 +40,7 @@ left();
 
 exit 0;
 
-sub input()
+sub input($)
 {
     my $filename = $_[0];
     

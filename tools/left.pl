@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.3 $
+# $Revision: 1.3.4.1 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 # aligns a text to the left
@@ -10,6 +10,8 @@
 #
 
 use strict;
+
+sub left($);
 
 my $file;
 
@@ -33,9 +35,9 @@ foreach $file (@ARGV) {
 
 exit 0;
 
-sub left()
+sub left($)
 {
-    my $filename = $_[0];
+    my $filename = shift;
     
     open FILE, "$filename" or die "can't read \"$filename\": $!";
     

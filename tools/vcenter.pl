@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.3.4.1 $
+# $Revision: 1.3.4.2 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 # aligns a text vertically centered
@@ -11,6 +11,9 @@
 #
 
 use strict;
+
+sub center_queue($);
+sub center_flush();
 
 my ($height, $file, @cache);
 
@@ -38,9 +41,9 @@ center_flush();
 
 exit 0;
 
-sub center_queue()
+sub center_queue($)
 {
-    my $filename = $_[0];
+    my $filename = shift;
     
     open FILE, "$filename" or die "can't read \"$filename\": $!";
     

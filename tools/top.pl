@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.3 $
+# $Revision: 1.3.4.1 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 # aligns a text upwards
@@ -11,6 +11,8 @@
 
 use strict;
 
+sub up($);
+       
 my ($height, $file, $totallines);
 
 $height     =   4 unless ($height = shift);
@@ -41,9 +43,9 @@ while ($totallines < $height) {
 
 exit 0;
 
-sub up()
+sub up($)
 {
-    my $filename = $_[0];
+    my $filename = shift;
     my $begin = 1;
     
     open FILE, "$filename" or die "can't read \"$filename\": $!";

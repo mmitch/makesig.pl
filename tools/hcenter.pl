@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.3 $
+# $Revision: 1.3.4.1 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 # centers a text horizontally
@@ -10,6 +10,8 @@
 #
 
 use strict;
+
+sub center($);
 
 my ($width, $file);
 
@@ -35,9 +37,9 @@ foreach $file (@ARGV) {
 
 exit 0;
 
-sub center()
+sub center($)
 {
-    my $filename = $_[0];
+    my $filename = shift;
     
     open FILE, "$filename" or die "can't read \"$filename\": $!";
     

@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.4.4.1 $
+# $Revision: 1.4.4.2 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 # indents a text to the right
@@ -10,6 +10,8 @@
 #
 
 use strict;
+
+sub indent($);
 
 my ($indent, $file, $indentstring);
 
@@ -32,15 +34,16 @@ for (my $i=0; $i < $indent; $i++) {
 }
 
 indent($file);
+
 foreach $file (@ARGV) {
     indent($file);
 }
 
 exit 0;
 
-sub indent()
+sub indent($)
 {
-    my $filename = $_[0];
+    my $filename = shift;
     
     open FILE, "$filename" or die "can't read \"$filename\": $!";
     
