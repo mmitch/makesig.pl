@@ -1,12 +1,12 @@
 #!/bin/sh
 #
-# $Revision: 1.4.4.2 $
+# $Revision: 1.4.4.3 $
 #
 # NOTE:
 # These examples want the tools to be present in the $PATH
 # ./../ and ./../tools/ are added to the $PATH
-# This should alright if you untared the archive as usual
-# and now are in the examples directory.
+# This should be alright if you untared the archive as usual and now
+# are in the examples directory.
 #
 
 PATH="../tools/:..:$PATH"
@@ -60,7 +60,7 @@ echo "Static files are boring. Here's your uptime:"
 uptime
 
 echo
-echo "Now lets put that uptime to the right:"
+echo "Now let's put that uptime to the right:"
 
 uptime | right.pl
 
@@ -111,9 +111,9 @@ echo
 
 echo "-- "
 overlay.pl \
-"makesig.pl left.conf | bottom.pl 4 | " \
-"makesig.pl right.conf | left.pl | cut -c 1-66 | top.pl 2 | hcenter.pl 66| indent.pl 13|" \
-"/usr/bin/uptime | bottom.pl 4 | cut -c 1-66 | right.pl 66| indent.pl 13|"
+"makesig.pl left.conf | bottom.pl 4 |" \
+"makesig.pl right.conf | left.pl | cut -c 1-66 | top.pl 2 | hcenter.pl 66 | indent.pl 13 |" \
+"/usr/bin/uptime | bottom.pl 4 | cut -c 1-66 | right.pl 66 | indent.pl 13 |"
 
 
 
