@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.6 $
+# $Revision: 1.7 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 #
@@ -145,8 +145,12 @@ sub read_file()
 			    push @subfiles, $val;
 
 			} elsif ($cmd =~ /maxlines/i) {
- # Prüfung auf numerisch einbauen?
-			    $config[$current_config]{maxlines} = $val;
+
+			    if ($val =~ /^\+?\d+$/) {
+				$config[$current_config]{maxlines} = $val;
+			    } else {
+				warn "makesig.pl: maxlines=$val is not numeric in signature file \"$filename\" at line $.\n";
+			    }
 
 			} elsif ($cmd =~ /sigdashes/i) {
 			    if (($val =~ /yes/i) or ($val == 1)) {
@@ -178,7 +182,7 @@ sub read_file()
 			    $config[$current_config]{footerfile} = $val;
 
 			} else {
-			    warn "makesig.pl: unknown configuration command \"$cmd\" in signature file \"$filename\"\n";
+			    warn "makesig.pl: unknown configuration command \"$cmd\" in signature file \"$filename\" at line $.\n";
 			}
 		    }
 		}
