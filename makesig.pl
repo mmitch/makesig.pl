@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.9.6.5 $
+# $Revision: 1.9.6.6 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 #
@@ -11,7 +11,7 @@
 use strict;
 
 # version information
-my $version = "0.0.6  -  2000-11-12";
+my $version = "0.0.7  -  2000-11-16";
 
 sub read_file ($$);
 sub pick_quote();

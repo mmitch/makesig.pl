@@ -1,6 +1,13 @@
 makesig.pl HISTORY
 
 
+v0.0.7  -  2000-11-16
+=====================
+
+- BUGFIX: the tools also produced those Perl 5.6 warnings
+
+
+
 v0.0.6  -  2000-11-12
 =====================
 
