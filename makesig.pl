@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.3 $
+# $Revision: 1.4 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 #
@@ -11,11 +11,14 @@ use strict;
 my $version = "0.0.2  -  2000-10-13";
 
 # now this is the array config holding an anonymous hash as value [0]
-my @config = ({'maxlines'   =>  0,
-	       'sigdashes'  =>  0,
-	       'headerfile' => "",
-	       'footerfile' => "",
-	       'nolinefeed' =>  0});
+my @config = ({
+    'maxlines'     =>  0,
+    'sigdashes'    =>  0,
+    'headerfile'   => "",
+    'footerfile'   => "",
+    'nolinefeed'   =>  0,
+    'fortunestyle' =>  0
+    });
 
 # nolinefeed entfernen -> extern!!!
 
@@ -72,6 +75,7 @@ sub read_file()
     my $cmd;
     my $val;
     my $linecount = 0;
+    my $delimiter;
     local *FILE;
 
     if ($filename =~ /^~\//) {
@@ -84,12 +88,18 @@ sub read_file()
 
 	open FILE, "$filename" or die "can't read \"$filename\": $!";
 	
+	if ($config[$current_config]{"fortunestyle"}) {
+	    $delimiter = "^%\$";
+	} else {
+	    $delimiter = "^\s*\$";
+	}
+
 	while (my $input = <FILE>) {
 	    if ($input =~ /^\s*beginconfig\(/i ) {
 		# Anfang Config
 		$config_mode = 1;
 		$config_count ++;
-		foreach my $I ("sigdashes", "maxlines", "footerfile", "headerfile", "nolinefeed") {
+		foreach my $I ("sigdashes", "maxlines", "footerfile", "headerfile", "nolinefeed", "fortunestyle") {
 		    $config[$config_count]{$I} = $config[$current_config]{$I};
 		}
 		$current_config = $config_count;
@@ -114,11 +124,13 @@ sub read_file()
 		    $val = unwhite($val);
 		    if ($cmd) {
 
+			# Obacht! Wir prüfen auf *cmd*, da kann vorher und nachher kommen, was will
+
 			if ($cmd =~ /otherfile/i) {
 			    push @subfiles, $val;
 
 			} elsif ($cmd =~ /maxlines/i) {
-# Prüfung auf numerisch einbauen?
+ # Prüfung auf numerisch einbauen?
 			    $config[$current_config]{maxlines} = $val;
 
 			} elsif ($cmd =~ /sigdashes/i) {
@@ -135,18 +147,30 @@ sub read_file()
 				$config[$current_config]{nolinefeed} = 0;
 			    }
 
+			} elsif ($cmd =~ /fortunestyle/i) {
+			    if (($val =~ /yes/i) or ($val == 1)) {
+				$config[$current_config]{fortunestyle} = 1;
+				$delimiter = "^%\$";
+			    } else {
+				$config[$current_config]{fortunestyle} = 0;
+				$delimiter = "^\s*\$";
+			    }
+
 			} elsif ($cmd =~ /headerfile/i) {
 			    $config[$current_config]{headerfile} = $val;
 
 			} elsif ($cmd =~ /footerfile/i) {
 			    $config[$current_config]{footerfile} = $val;
+
+			} else {
+			    warn "makesig.pl: unknown configuration command \"$cmd\" in signature file \"$filename\"\n";
 			}
 		    }
 		}
 	    } else {
-		# A Quote! or a newline?
+		# A Quote! or a delimiter?
 
-		if ($input !~ /^\s*$/) {
+		if ($input !~ /$delimiter/) {
 
 		    $newquote=$newquote . $input;
 		    $linecount ++;
