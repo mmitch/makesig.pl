@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.3 $
+# $Revision: 1.3.4.1 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 # aligns a text vertically centered
@@ -31,7 +31,7 @@ die "height is not numeric!\n" unless $height =~ /^\+?\d*$/;
 center_queue($file);
 
 foreach $file (@ARGV) {
-    down_center($file);
+    center_queue($file);
 }
 
 center_flush();
