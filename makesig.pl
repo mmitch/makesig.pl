@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.7 $
+# $Revision: 1.8 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 #
@@ -153,21 +153,21 @@ sub read_file()
 			    }
 
 			} elsif ($cmd =~ /sigdashes/i) {
-			    if (($val =~ /yes/i) or ($val == 1)) {
+			    if ($val =~ /yes/i) {
 				$config[$current_config]{sigdashes} = 1;
 			    } else {
 				$config[$current_config]{sigdashes} = 0;
 			    }
 
 			} elsif ($cmd =~ /nolinefeed/i) {
-			    if (($val =~ /yes/i) or ($val == 1)) {
+			    if ($val =~ /yes/i) {
 				$config[$current_config]{nolinefeed} = 1;
 			    } else {
 				$config[$current_config]{nolinefeed} = 0;
 			    }
 
 			} elsif ($cmd =~ /fortunestyle/i) {
-			    if (($val =~ /yes/i) or ($val == 1)) {
+			    if ($val =~ /yes/i) {
 				$config[$current_config]{fortunestyle} = 1;
 				$delimiter = "^%\$";
 			    } else {
