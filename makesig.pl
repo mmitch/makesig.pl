@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.10 $
+# $Revision: 1.9.6.1 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 #
@@ -9,22 +9,39 @@
 #
 
 use strict;
-use Makesig::Configuration;
-use Makesig::File;
-use Makesig::Quote;
 
 # version information
-my $version = "0.1.0  -  2000-xx-yy  -  experimental branch";
+my $version = "0.0.4  -  2000-10-15";
 
-my @files = ();
+sub read_file ($$);
+sub pick_quote();
+sub print_quote();
+
+# now this is the array config holding an anonymous hash as value [0]
+my @config = ({
+    'maxlines'     =>  0,
+    'sigdashes'    =>  0,
+    'headerfile'   => "",
+    'footerfile'   => "",
+    'nolinefeed'   =>  0,
+    'fortunestyle' =>  0
+    });
+
+my @verweis=();
+my @quotes=();
+my $auswahl="";
 
 my $homedir=$ENV{"HOME"};
+
+my $config_count = 0;
 
 my $file="-";
 
 if (defined $ARGV[0]) {
     $file=shift;
 }
+
+my @visited=();
 
 if ($file eq "--help") {
 
@@ -49,9 +66,7 @@ EOF
 
 } else {
 
-    my $file = File new();
-    $file->filename = $file;
-    $file->readAll();
+    read_file($file,0);
 
     while ($file = shift) {
 	read_file($file,0);
@@ -67,7 +82,7 @@ exit 0;
 #
 #
 
-sub read_file()
+sub read_file($$)
 {
     my @subfiles=();
     my $filename = $_[0];
@@ -93,7 +108,7 @@ sub read_file()
 	if ($config[$current_config]{"fortunestyle"}) {
 	    $delimiter = "^%\$";
 	} else {
-	    $delimiter = "^\s*\$";
+	    $delimiter = '^\s*\$';
 	}
 
 	while (my $input = <FILE>) {
@@ -159,7 +174,7 @@ sub read_file()
 				$delimiter = "^%\$";
 			    } else {
 				$config[$current_config]{fortunestyle} = 0;
-				$delimiter = "^\s*\$";
+				$delimiter = '^\s*\$';
 			    }
 
 			} elsif ($cmd =~ /headerfile/i) {
