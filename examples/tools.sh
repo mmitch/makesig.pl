@@ -106,7 +106,10 @@ echo "files. Much cooler, but nobody can read the script :-)"
 echo
 
 echo "-- "
-./../tools/overlay.pl "./../makesig.pl ./left.conf | ./../tools/bottom.pl 4 | " "./../makesig.pl ./right.conf | ./../tools/left.pl | /usr/bin/cut -c 1-66 | ./../tools/top.pl 2 | ./../tools/hcenter.pl 66| ./../tools/indent.pl 13|" "/usr/bin/uptime | ./../tools/bottom.pl 4 | /usr/bin/cut -c 1-66 | ./../tools/right.pl 66| ./../tools/indent.pl 13|"
+./../tools/overlay.pl \
+"./../makesig.pl ./left.conf | ./../tools/bottom.pl 4 | " \
+"./../makesig.pl ./right.conf | ./../tools/left.pl | /usr/bin/cut -c 1-66 | ./../tools/top.pl 2 | ./../tools/hcenter.pl 66| ./../tools/indent.pl 13|" \
+"/usr/bin/uptime | ./../tools/bottom.pl 4 | /usr/bin/cut -c 1-66 | ./../tools/right.pl 66| ./../tools/indent.pl 13|"
 
 
 
