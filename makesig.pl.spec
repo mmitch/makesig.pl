@@ -1,15 +1,15 @@
 Summary: A very flexible random signature generator.
 Name: makesig.pl
-Version: 0.0.2
+Version: 0.0.3
 Release: 1
 Copyright: GPL
 Group: Utilities/Text
-Source: makesig.pl-0.0.2.tar.gz
-Patch: makesig.pl-0.0.2-1.rpmpatch
+Source: makesig.pl-0.0.3.tar.gz
+Patch: makesig.pl-0.0.3-1.rpmpatch.gz
 %description
 makesig.pl is a very flexible random signature generator for those who
 don't fear the power of the command line. It comes together with some
-tools to format your signature.
+tools to format your signature. makesig.pl can also read fortune files.
 
 %prep
 %setup
