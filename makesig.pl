@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.8 $
+# $Revision: 1.9 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 #
@@ -11,7 +11,7 @@
 use strict;
 
 # version information
-my $version = "0.0.3  -  2000-10-14";
+my $version = "0.0.4  -  2000-10-15";
 
 # now this is the array config holding an anonymous hash as value [0]
 my @config = ({
@@ -22,8 +22,6 @@ my @config = ({
     'nolinefeed'   =>  0,
     'fortunestyle' =>  0
     });
-
-# nolinefeed entfernen -> extern!!!
 
 my @verweis=();
 my @quotes=();
