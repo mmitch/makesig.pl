@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.4 $
+# $Revision: 1.4.4.1 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 # indents a text to the right
@@ -33,7 +33,7 @@ for (my $i=0; $i < $indent; $i++) {
 
 indent($file);
 foreach $file (@ARGV) {
-    left($file);
+    indent($file);
 }
 
 exit 0;
