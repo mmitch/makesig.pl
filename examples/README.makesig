@@ -1,0 +1,93 @@
+
+		  makesig.pl  v0.0.2  -  2000-10-13
+
+		 A random signature changer for those
+	    who don't fear the power of the command line.
+				   
+	      2000 (C) by Christian Garbs <mitch@uni.de>
+	Licensed under the GNU GPL - see COPYING for details.
+
+	   http://www.h.shuttle.de/mitch/makesig_pl.en.html
+
+			       -- -- --
+
+The makesig.pl script will select a random signature from a signature
+file. A signature file consists of plain ascii text. The signatures
+are each separated by a blank line.
+
+Signature files are passed as commandline arguments. "-" means stdin.
+
+$ makesig.pl foo.txt - foobar.txt < bar.txt
+
+The example above will make makesig.pl read "foo.txt", then "bar.txt"
+and finally "foobar.txt". makesig.pl then randomly selects one of the
+signatures and prints it to stdout.
+
+			       -- -- --
+
+When a signature starts with the string "beginconfig(", makesig.pl
+looks for a configuration block. This block is ended with again with a
+")endconfig" line. The configuration block will not be printed as a
+signature. Inside a configuration block, these commands are valid:
+
+otherfile=<filename>    This is like giving a signature file on the
+                        command line. It allows nested structures of
+                        signature files. Think of two files that just
+                        contain different configurations but share the
+                        same signatures sourced from a third file.
+
+maxlines=<n>            Only signatures with equal or less than <n>
+                        lines will be printed. Useful to keep your
+                        signatures within the 4 lines maximum.
+
+sigdashes=<yes|no>      When set to yes, the chosen signature will be
+                        prepended by "-- \n".
+
+nolinefeed=<yes|no>     When set to yes, the final newline at the end
+                        of the signature will be suppressed. Useful to
+                        keep your signatures within the 4 lines
+                        maximum.
+
+headerfile=<filename>   This file's contents will be prepended to the
+                        chosen signature. This argument will be passed
+                        to Perl's open() function, so given something
+                        like "update|" will execute the program and
+                        read it's stdout.
+
+footerfile=<filename>   This file's contents will be appended to the
+                        chosen signature. Again, Perl open() is used.
+
+			       -- -- --
+
+This is an example signature file containing five signatures and a
+configuration block. Your current uptime will be added to the
+signature as well as some sigdashes. No signatures longer than 2 lines
+will be chosen.
+
+Note that the configuration is set after the first signature. The
+maxlines=2 doesn't affect the first signature, nor will the sigdashes
+or footerfile be printed when the first signature gets chosen.
+
+###BEGIN###
+>Linux is not user-friendly.
+It _is_ user-friendly.  It is not ignorant-friendly and
+idiot-friendly.            (Seen somewhere on the net.)
+
+beginconfig(
+maxlines=2
+footerfile=uptime|
+sigdashes=yes
+)endconfig
+
+I cna tyep 400 Wrods pre miuet
+
+No space left in message for a signature.
+
+sigfault
+
+The feature you'd like to have is probably already installed
+on your Linux system.
+
+I found The Secret Of Monkey Island and all I got was this
+lousy T-Shirt!
+####END####
