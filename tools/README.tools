@@ -1,39 +1,35 @@
 
-
-===> BLOCK-tools are not implemented yet !!!
-
-
-
 How do I generate a really cool signature?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-First there are the GNU textutils. Take a look at these:
+First there are the GNU textutils. They are propably already installed
+on your system:
 
  cat, tac, fmt, fold, head, tail, cut, expand, unexpand
 
 Then there are some of my own tools in this directory:
 
-- left.pl aligns a text to the left
-- right.pl aligns a text to the right
+- left.pl    aligns a text to the left
+- right.pl   aligns a text to the right
 - hcenter.pl aligns a text to the center (horizontally)
 
-- top.pl aligns a text to the top
-- bottom.pl aligns a text to the bottom
+- top.pl     aligns a text to the top
+- bottom.pl  aligns a text to the bottom
 - vcenter.pl aligns a text to the bottom (vertically)
 
-- indent.pl moves a text to the right
+- indent.pl  moves a text to the right
 
 - leftblock.pl, rightblock.pl and hcenterblock.pl do the same as
   left.pl, right.pl and hcenter.pl - the difference is that they don't
-  work line per line but treat the input as a whole block
+  work line per line but treat the input as a whole block.
 
 All these tools are called with this syntax:
 
   command [width/height/movement] [inputfile1] [inputfile2] [inputfile...]
 
-Then there are two special tools:
+There are two special tools:
 
-- eatlinefeed.pl removes the final linefeed of an input file
+- eatlinefeed.pl removes the final linefeed of an input file.
 - overlay.pl puts multiple files on top of each other. Only space
   characters will be overwritten by later files, so the first file is
   "on top".
@@ -51,5 +47,5 @@ you can also write:
 
 indent.pl 5 "/usr/bin/uptime|"
 
-No go and combine these tools. Some ideas for this are found in the
+No go and use these tools. Some ideas for this are found in the
 examples directory.
