@@ -12,19 +12,19 @@ sub new {
     my $self  = {};
     if (@_) {
 	my $parent = shift;
-	$self->{FORTUNESTYLE}   = $parent->{FORTUNESTYLE};
-	$self->{NOLINEFEED}     = $parent->{NOLINEFEED};
-	$self->{SIGDASHES}      = $parent->{SIGDASHES};
-	$self->{MAXLINES}       = $parent->{MAXLINES};
-	$self->{HEADERFILE}     = $parent->{HEADERFILE};
-	$self->{FOOTERFILE}     = $parent->{FOOTERFILE};
+	$self->{FORTUNESTYLE} = $parent->{FORTUNESTYLE};
+	$self->{NOLINEFEED}   = $parent->{NOLINEFEED};
+	$self->{SIGDASHES}    = $parent->{SIGDASHES};
+	$self->{MAXLINES}     = $parent->{MAXLINES};
+	$self->{HEADERFILE}   = $parent->{HEADERFILE};
+	$self->{FOOTERFILE}   = $parent->{FOOTERFILE};
     } else {
-	$self->{FORTUNESTYLE}   =  0;
-	$self->{NOLINEFEED}     =  0;
-	$self->{SIGDASHES}      =  0;
-	$self->{MAXLINES}       =  0;
-	$self->{HEADERFILE}     = "";
-	$self->{FOOTERFILE}     = "";
+	$self->{FORTUNESTYLE} =  0;
+	$self->{NOLINEFEED}   =  0;
+	$self->{SIGDASHES}    =  0;
+	$self->{MAXLINES}     =  0;
+	$self->{HEADERFILE}   = "";
+	$self->{FOOTERFILE}   = "";
     }
     bless ($self, $class);
     return $self;
