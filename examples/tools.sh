@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Revision: 1.4.4.1 $
+# $Revision: 1.4.4.2 $
 #
 # NOTE:
 # These examples want the tools to be present in the $PATH
@@ -12,7 +12,7 @@
 PATH="../tools/:..:$PATH"
 
 echo "This is a demonstration of the makesig.pl random signature generator."
-echo "Get your up-to-date copy at http://www.h.shuttle.de/mitch/makesig_pl.en.html"
+echo "Get your up-to-date copy at http://www.cgarbs.de/makesig_pl.en.html"
 echo
 
 echo "Let's try working with static files."

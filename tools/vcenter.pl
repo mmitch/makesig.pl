@@ -1,13 +1,13 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.3.4.2 $
+# $Revision: 1.3.4.3 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 # aligns a text vertically centered
 # no trailing empty lines are generated!
 #
 # This program is part of the makesig.pl package:
-# http://www.h.shuttle.de/mitch/makesig_pl.en.html
+# http://www.cgarbs.de/makesig_pl.en.html
 #
 
 use strict;

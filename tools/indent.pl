@@ -1,12 +1,12 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.4.4.2 $
+# $Revision: 1.4.4.3 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 # indents a text to the right
 #
 # This program is part of the makesig.pl package:
-# http://www.h.shuttle.de/mitch/makesig_pl.en.html
+# http://www.cgarbs.de/makesig_pl.en.html
 #
 
 use strict;
