@@ -1,6 +1,14 @@
 makesig.pl HISTORY
 
 
+v0.0.9  -  2000-12-18
+=====================
+
+- BUGFIX: the tools left.pl and indent.pl couldn't handle input data
+          containing dollar signs correctly
+
+
+
 v0.0.8  -  2000-12-16
 =====================
 
