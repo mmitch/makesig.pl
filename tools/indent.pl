@@ -1,29 +1,35 @@
 #!/usr/bin/perl -w
-
-# version 1
+#
+# $Revision: 1.2 $
+#
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 # indents a text to the right
 
-$indent = 2 unless ($indent = shift());
+use strict;
 
-$file = "-" unless ($file = shift());
+my ($indent, $file, $indentstring);
 
-if (($indent eq "--help") || ($file eq "--help")) {
+$indent =   2 unless ($indent = shift);
+$file   = "-" unless ($file   = shift);
+
+if (($indent eq "--help") or ($file eq "--help")) {
+
     print "Usage:\n";
     print "  right.pl [indentation] [file1] [file2] [file3] [...]\n";
     print "This program will indent a given text to the right\n";
-} else {
 
-    $indentstring = "";
-    for ($i=0;$i<$indent;$i++) {
-	$indentstring = " " . $indentstring;
-    }
+    exit 0;
 
-    indent($file);
+}
 
-    while($file = shift()) {
-	left($file);
-    }
+$indentstring = "";
+for (my $i=0; $i < $indent; $i++) {
+    $indentstring = " " . $indentstring;
+}
+
+indent($file);
+foreach $file (@ARGV) {
+    left($file);
 }
 
 exit 0;
@@ -32,13 +38,12 @@ sub indent()
 {
     my $filename = $_[0];
     
-    open(FILE,"$filename") || die "can't read $filename\n";
+    open FILE, "$filename" or die "can't read \"$filename\": $!";
     
     while ($line = <FILE>) {
-	$line =~ s/[\s\t]*\$//;
+	$line =~ s/\s*\$//;
 	print "$indentstring$line";
     }
     
-    close(FILE) || die "can't read $filename\n";
-    
+    close FILE or die "can't read \"$filename\": $!";
 }

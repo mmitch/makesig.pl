@@ -1,31 +1,38 @@
 #!/usr/bin/perl -w
-
-# version 2
+#
+# $Revision: 1.2 $
+#
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 # aligns a text upwards
 
-$height = 4 unless ($height = shift());
+use strict;
 
-$file = "-" unless ($file = shift());
+my ($height, $file, $totallines);
 
-$totallines = 0;
+$height     =   4 unless ($height = shift);
+$file       = "-" unless ($file   = shift);
+$totallines =   0;
 
-if (($height eq "--help") || ($file eq "--help")) {
+if (($height eq "--help") or ($file eq "--help")) {
+
     print "Usage:\n";
     print "  top.pl [height] [file1] [file2] [file3] [...]\n";
     print "This program will align a given text upwards\n";
-} else {
 
+    exit 0;
+}
+
+die "height is not numeric!\n" unless $height =~ /^\+?\d*$/;
+
+up($file);
+
+foreach $file (@ARGV) {
     up($file);
+}
 
-    while($file = shift()) {
-	up($file);
-    }
-
-    while ($totallines < $height) {
-	print "\n";
-	$totallines++;
-    }
+while ($totallines < $height) {
+    print "\n";
+    $totallines++;
 }
 
 exit 0;
@@ -35,14 +42,11 @@ sub up()
     my $filename = $_[0];
     my $begin = 1;
     
-    open(FILE,"$filename") || die "can't read $filename\n";
+    open FILE, "$filename" or die "can't read \"$filename\": $!";
     
-    while ($line = <FILE>) {
+    while (my $line = <FILE>) {
 	if ($begin == 1) {
-	    $test=$line;
-	    chomp($test);
-	    $test=~ s/[\s\t]//g;
-	    if ($test ne "") {
+	    if ($line !~ /^\s*$/) {
 		print "$line";
 		$totallines++;
 		$begin = 0;
@@ -53,6 +57,6 @@ sub up()
 	}
     }
     
-    close(FILE) || die "can't read $filename\n";
+    close FILE or die "can't read \"$filename\": $!";
     
 }

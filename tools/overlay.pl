@@ -1,25 +1,32 @@
 #!/usr/bin/perl -w
-
-# version 2
+#
+# $Revision: 1.2 $
+#
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 # overlays multiple text files
 
-$file = "-" unless ($file = shift());
+use strict;
+
+my ($file, @buffer);
+
+$file = "-" unless ($file = shift);
 
 if ($file eq "--help") {
+
     print "Usage:\n";
     print "  overlay.pl [file1] [file2] [file3] [...]\n";
     print "This program will overlay multiple text files\n";
-} else {
-    @buffer = ();
-    overlay_queue($file);
 
-    while($file = shift()) {
-	overlay_queue($file);
-    }
-
-    overlay_flush();
+    exit 0;
 }
+
+overlay_queue($file);
+
+foreach $file (@ARGV) {
+    overlay_queue($file);
+}
+
+overlay_flush();
 
 exit 0;
 
@@ -27,38 +34,34 @@ sub overlay_queue()
 {
     my $filename = $_[0];
     
-    open(FILE,"$filename") || die "can't read $filename\n";
+    open FILE, "$filename" or die "can't read \"$filename\": $!";
 
-    $linecnt=0;
-    while ($line = <FILE>) {
-	chomp($line);
-	if ($linecnt+1 > @buffer) {
-	    push(@buffer,$line) ;
+    my $linecnt=0;
+    while (my $line = <FILE>) {
+	chomp $line;
+	if ($linecnt + 1 > @buffer) {
+	    push @buffer, $line;
 	} else {
-	    while(length($buffer[$linecnt]) < length($line)) {
-		$buffer[$linecnt] .= " ";
-	    }
-	    for ($x=0;$x<length($line);$x++) {
-	
-		if ($x < length($line)) {
-		    if (substr($buffer[$linecnt],$x,1) eq " ") {
-			substr($buffer[$linecnt],$x,1) = substr($line,$x,1);
-		    }
-		} else {
-		    $buffer[$linecnt] = $buffer[$linecnt] . substr($line,$x,1);
+	    my $min = length $buffer[$linecnt];
+	    $min = length $line unless length $line > $min;
+	    for (my $x = 0; $x < $min; $x++) {
+		if (substr($buffer[$linecnt], $x, 1) eq " ") {
+		    substr($buffer[$linecnt], $x, 1) = substr $line, $x, 1;
 		}
+	    }
+	    if (length $buffer[$linecnt] < length $line) {
+		$buffer[$linecnt] .= substr $line, length $buffer[$linecnt];
 	    }
 	}
 	$linecnt++;
     }
     
-    close(FILE) || die "can't read $filename\n";
+    close FILE or die "can't read \"$filename\": $!";
 }
 
 sub overlay_flush()
 {
-    while ($output = shift(@buffer)) {
+    foreach my $output (@buffer) {
 	print "$output\n";
     }
 }
-
