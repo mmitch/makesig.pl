@@ -1,14 +1,21 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.2 $
+# $Revision: 1.3 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 #
 
 use strict;
 
+# version information
+my $version = "0.0.2  -  2000-10-13";
+
 # now this is the array config holding an anonymous hash as value [0]
-my @config = ({'maxlines',0,'sigdashes',0,'headerfile',"",'footerfile',"",'nolinefeed',0});
+my @config = ({'maxlines'   =>  0,
+	       'sigdashes'  =>  0,
+	       'headerfile' => "",
+	       'footerfile' => "",
+	       'nolinefeed' =>  0});
 
 # nolinefeed entfernen -> extern!!!
 
@@ -19,7 +26,6 @@ my $auswahl="";
 my $homedir=$ENV{"HOME"};
 
 my $config_count = 0;
-my $linebreak="\n";
 
 my $file="-";
 
@@ -30,8 +36,16 @@ if (defined $ARGV[0]) {
 my @visited=();
 
 if ($file eq "--help") {
-    print "perl_makesign\n";
+
+    print << "EOF";
+makesig.pl $version
+Usage:
+  makesig.pl [signature_file] [signature_file] [...]
+
+EOF
+
 } else {
+
     read_file($file,0);
 
     while ($file = shift) {
@@ -64,67 +78,66 @@ sub read_file()
 	$filename =~ s/^~/$homedir/;
     }
 
-    my $vorhanden = 0;
-    foreach my $test (@visited) {
-	if ($test eq $filename) {
-	    $vorhanden = 1;
-	}
-    }
-    
-    if (! $vorhanden) {
+    if (! grep /$filename/, @visited) {
 
-	push(@visited,$filename);
+	push @visited, $filename;
 
-	open(FILE,"$filename") || die "can't read $filename\n";
+	open FILE, "$filename" or die "can't read \"$filename\": $!";
 	
 	while (my $input = <FILE>) {
-	    if ($input =~ /^[\s\t]*beginconfig\(/i ) {
+	    if ($input =~ /^\s*beginconfig\(/i ) {
 		# Anfang Config
 		$config_mode = 1;
 		$config_count ++;
-		foreach my $I ("sigdashes","maxlines","footerfile","headerfile","nolinefeed") {
+		foreach my $I ("sigdashes", "maxlines", "footerfile", "headerfile", "nolinefeed") {
 		    $config[$config_count]{$I} = $config[$current_config]{$I};
 		}
 		$current_config = $config_count;
 
-	    } elsif ($input =~ /^[\s\t]*\)endconfig/i ) {
+	    } elsif ($input =~ /^\s*\)endconfig/i ) {
 		# Ende Config
 
 		$config_mode = 0;
 		while (@subfiles) {
-		    read_file(pop(@subfiles),$current_config);
+		    read_file(pop @subfiles, $current_config);
 		}
 
 	    } elsif ($config_mode == 1) {
 		# configuration variables
 
-		if ($input !~ /^[\s\t]*\#/ ) {
+		if ($input !~ /^\s*\#/ ) {
 
 		    # it's no comment
-		    chomp($input);
-		    ($cmd,$val) = split(/=/,$input);
-		    $cmd=unwhite($cmd);
-		    $val=unwhite($val);
+		    chomp $input;
+		    ($cmd, $val) = split /=/, $input;
+		    $cmd = unwhite($cmd);
+		    $val = unwhite($val);
 		    if ($cmd) {
+
 			if ($cmd =~ /otherfile/i) {
-			    push(@subfiles,$val);
+			    push @subfiles, $val;
+
 			} elsif ($cmd =~ /maxlines/i) {
 # Prüfung auf numerisch einbauen?
 			    $config[$current_config]{maxlines} = $val;
+
 			} elsif ($cmd =~ /sigdashes/i) {
-			    if (($val =~ /yes/i) || ($val == 1)) {
+			    if (($val =~ /yes/i) or ($val == 1)) {
 				$config[$current_config]{sigdashes} = 1;
 			    } else {
 				$config[$current_config]{sigdashes} = 0;
 			    }
+
 			} elsif ($cmd =~ /nolinefeed/i) {
-			    if (($val =~ /yes/i) || ($val == 1)) {
+			    if (($val =~ /yes/i) or ($val == 1)) {
 				$config[$current_config]{nolinefeed} = 1;
 			    } else {
 				$config[$current_config]{nolinefeed} = 0;
 			    }
+
 			} elsif ($cmd =~ /headerfile/i) {
 			    $config[$current_config]{headerfile} = $val;
+
 			} elsif ($cmd =~ /footerfile/i) {
 			    $config[$current_config]{footerfile} = $val;
 			}
@@ -141,10 +154,10 @@ sub read_file()
 		} elsif ($newquote ne "") {
 
 # copy this downto <<HERE>>
-		    if (($config[$current_config]{maxlines} == 0) ||
+		    if (($config[$current_config]{maxlines} == 0) or
                         ($linecount <= $config[$current_config]{maxlines})) {
-			push(@verweis,$current_config);
-			push(@quotes,$newquote);
+			push @verweis, $current_config;
+			push @quotes, $newquote;
 		    }
 
 		    $newquote="";
@@ -157,15 +170,15 @@ sub read_file()
 # <<HERE>
 	if ($newquote ne "") {
 
-	    if (($config[$current_config]{maxlines} == 0) ||
+	    if (($config[$current_config]{maxlines} == 0) or
 		($linecount <= $config[$current_config]{maxlines})) {
-		push(@verweis,$current_config);
-		push(@quotes,$newquote);
+		push @verweis, $current_config;
+		push @quotes, $newquote;
 	    }
 	    
 	}
 	
-	close(FILE) || die "can't close $filename\n";
+	close FILE or die "can't close \"$filename\": $!";
 	
     }
 }
@@ -178,7 +191,7 @@ sub pick_quote()
     if (! @quotes) {
 	die "no quotes found\n";
     } else {
-	$auswahl = int(rand(@quotes));
+	$auswahl = int(rand @quotes);
     }
 }
 
@@ -192,21 +205,23 @@ sub print_quote()
     }
 
     if ($config[$verweis[$auswahl]]{headerfile}) {
-	open (HEADER, "$config[$verweis[$auswahl]]{headerfile}") || die "can't open $config[$verweis[$auswahl]]{headerfile}\n";
+	open HEADER, "$config[$verweis[$auswahl]]{headerfile}"
+	    or die "can't open \"$config[$verweis[$auswahl]]{headerfile}\": $!";
 	while (my $input = <HEADER>) {
 	    $ausgabe .= $input;
 	}
-	close (HEADER) || die "can't close $config[$verweis[$auswahl]]{headerfile}\n";
+	close HEADER or die "can't close \"$config[$verweis[$auswahl]]{headerfile}\": $!";
     }
-
+    
     $ausgabe .= $quotes[$auswahl];
-
+    
     if ($config[$verweis[$auswahl]]{footerfile}) {
-	open (FOOTER, "$config[$verweis[$auswahl]]{footerfile}") || die "can't open $config[$verweis[$auswahl]]{footerfile}\n";
+	open FOOTER, "$config[$verweis[$auswahl]]{footerfile}"
+	    or die "can't open \"$config[$verweis[$auswahl]]{footerfile}\": $!";
 	while (my $input = <FOOTER>) {
 	    $ausgabe .= $input;
 	}
-	close (FOOTER) || die "can't close $config[$verweis[$auswahl]]{footerfile}\n";
+	close FOOTER or die "can't close \"$config[$verweis[$auswahl]]{footerfile}\": $!";
     }
 
     if ($config[$verweis[$auswahl]]{nolinefeed}) {
