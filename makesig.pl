@@ -1,14 +1,17 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.5 $
+# $Revision: 1.6 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
+#
+# This program is part of the makesig.pl package:
+# http://www.h.shuttle.de/mitch/makesig_pl.en.html
 #
 
 use strict;
 
 # version information
-my $version = "0.0.2  -  2000-10-13";
+my $version = "0.0.3  -  2000-10-14";
 
 # now this is the array config holding an anonymous hash as value [0]
 my @config = ({
