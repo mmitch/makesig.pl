@@ -1,6 +1,13 @@
 makesig.pl HISTORY
 
 
+v0.0.4  -  2000-10-15    <<---  3 days in a row: release early,
+=====================                            release often 
+
+- BUGFIX: removed some Perl warning messages
+
+
+
 v0.0.3  -  2000-10-14
 =====================
 
@@ -9,18 +16,18 @@ v0.0.3  -  2000-10-14
 
 
 
-v0.0.2  -  2000-10-13  <<---  Friday 13th!
+v0.0.2  -  2000-10-13    <<---  Friday 13th!
 =====================
 
+- BUGFIX: sigdashes didn't work
 - missing block tools are available now
-- sigdashes didn't work
 - added documentation of signature file format
 - code cleanups
 
 
 
-v0.0.1  -  2000-10-01
-=====================
+v0.0.1  -  2000-10-01    <<---  After one year of personal use
+=====================           I decided to release makesig.pl
 
 - initial release
 - block tools (leftblock.pl, rightblock.pl, ...) still missing
