@@ -1,0 +1,17 @@
+makesig.pl HISTORY
+
+
+v0.0.2  -  2000-10-01
+=====================
+
+- added documentation about signature file format
+- missing block tools are available now
+- code cleanups
+
+
+
+v0.0.1  -  2000-10-01
+=====================
+
+- initial release
+- block tools (leftblock.pl, rightblock.pl, ...) still missing
