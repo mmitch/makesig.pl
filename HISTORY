@@ -1,11 +1,12 @@
 makesig.pl HISTORY
 
 
-v0.0.2  -  2000-10-01
+v0.0.2  -  2000-10-13  <<---  Friday 13th!
 =====================
 
-- added documentation about signature file format
 - missing block tools are available now
+- sigdashes didn't work
+- added documentation of signature file format
 - code cleanups
 
 
