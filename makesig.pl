@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.9.6.3 $
+# $Revision: 1.9.6.4 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 #
@@ -16,6 +16,7 @@ my $version = "0.0.5  -  2000-11-10";
 sub read_file ($$);
 sub pick_quote();
 sub print_quote();
+sub unwhite($);
 
 # now this is the array config holding an anonymous hash as value [0]
 my @config = ({
@@ -108,7 +109,7 @@ sub read_file($$)
 	if ($config[$current_config]{"fortunestyle"}) {
 	    $delimiter = "^%\$";
 	} else {
-	    $delimiter = '^\s*\$';
+	    $delimiter = '^\s*$';
 	}
 
 	while (my $input = <FILE>) {
@@ -174,7 +175,7 @@ sub read_file($$)
 				$delimiter = "^%\$";
 			    } else {
 				$config[$current_config]{fortunestyle} = 0;
-				$delimiter = '^\s*\$';
+				$delimiter = '^\s*$';
 			    }
 
 			} elsif ($cmd =~ /headerfile/i) {
@@ -280,7 +281,7 @@ sub print_quote()
 #
 #
 
-sub unwhite()
+sub unwhite($)
 {
     if (my $arg = $_[0]) {
 	$arg =~ s/^\s+//;
