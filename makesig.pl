@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.4 $
+# $Revision: 1.5 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 #
@@ -44,6 +44,18 @@ if ($file eq "--help") {
 makesig.pl $version
 Usage:
   makesig.pl [signature_file] [signature_file] [...]
+
+Quick overview of configuration blocks:
+beginconfig(
+  # just a comment
+  otherfile=<filename>
+  headerfile=<filename>
+  footerfile=<filename>
+  maxlines=<n>
+  sigdashes=<yes|no>
+  nolinefeed=<yes|no>
+  fortunestyle=<yes|no>
+)endconfig
 
 EOF
 
