@@ -1,8 +1,8 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.3 $
+# $Revision: 1.4 $
 #
-# 2000 (C) by Christian Garbs <mitch@uni.de>
+# 2000 (C) by Christian Garbs <mitch@cgarbs.de>
 # overlays multiple text files
 #
 # This program is part of the makesig.pl package:

@@ -1,8 +1,8 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.4 $
+# $Revision: 1.5 $
 #
-# 2000 (C) by Christian Garbs <mitch@uni.de>
+# 2000 (C) by Christian Garbs <mitch@cgarbs.de>
 # indents a text to the right
 #
 # This program is part of the makesig.pl package:

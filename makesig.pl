@@ -1,8 +1,8 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.10 $
+# $Revision: 1.11 $
 #
-# 2000 (C) by Christian Garbs <mitch@uni.de>
+# 2000 (C) by Christian Garbs <mitch@cgarbs.de>
 #
 # This program is part of the makesig.pl package:
 # http://www.h.shuttle.de/mitch/makesig_pl.en.html
