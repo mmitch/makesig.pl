@@ -1,6 +1,13 @@
 makesig.pl HISTORY
 
 
+v0.0.5  -  2000-11-10
+=====================
+
+- BUGFIX: removed some warnings that only appeared on Perl 5.6
+
+
+
 v0.0.4  -  2000-10-15    <<---  3 days in a row: release early,
 =====================                            release often 
 
