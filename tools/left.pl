@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.3.4.2 $
+# $Revision: 1.3.4.3 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 # aligns a text to the left
@@ -42,9 +42,10 @@ sub left($)
     open FILE, "$filename" or die "can't read \"$filename\": $!";
     
     while (my $line = <FILE>) {
-	$line =~ s/^[\s\t]*//;
-	$line =~ s/[\s\t]*\$//;
-	print "$line";
+	# strip leading and trailing whitespace (also strips newline!)
+	$line =~ s/^\s+//;
+	$line =~ s/\s+$//;
+	print "$line\n";
     }
     
     close FILE or die "can't read \"$filename\": $!";

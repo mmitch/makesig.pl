@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.4.4.3 $
+# $Revision: 1.4.4.4 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 # indents a text to the right
@@ -48,8 +48,9 @@ sub indent($)
     open FILE, "$filename" or die "can't read \"$filename\": $!";
     
     while (my $line = <FILE>) {
-	$line =~ s/\s*\$//;
-	print "$indentstring$line";
+	# strip trailing whitespace (also strips newline!)
+	$line =~ s/\s+$//;
+	print "$indentstring$line\n";
     }
     
     close FILE or die "can't read \"$filename\": $!";
