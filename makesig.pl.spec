@@ -1,20 +1,20 @@
 Summary: A very flexible random signature generator.
 Name: makesig.pl
-Version: 0.0.1
+Version: 0.0.2
 Release: 1
 Copyright: GPL
 Group: Utilities/Text
-Source: makesig.pl-0.0.1.tar.gz
+Source: makesig.pl-0.0.2.tar.gz
+Patch: makesig.pl-0.0.2-1.rpmpatch
 %description
 makesig.pl is a very flexible random signature generator for those who
 don't fear the power of the command line. It comes together with some
 tools to format your signature.
 
-__> examples/tools.sh geht nicht weil mit Pfaden!
-__> nicht den gesamten examples-Ordner in %doc übernehmen
- 
 %prep
 %setup
+%patch -p1
+
 %build
 
 %install
@@ -34,8 +34,7 @@ cp tools/vcenter.pl /usr/bin/
 
 
 %files
-%doc COPYING tools/README.tools examples/
-/usr/bin/makesig.pl
+%doc HISTORY COPYING tools/README.tools examples/README.makesig examples/README.examples examples/asciiart.txt examples/background.txt examples/demo.txt examples/left.conf examples/moresigs.txt examples/right.conf examples/somesigs.txt examples/tools.sh
 /usr/bin/bottom.pl
 /usr/bin/eatlinefeed.pl
 /usr/bin/hcenter.pl
@@ -43,6 +42,7 @@ cp tools/vcenter.pl /usr/bin/
 /usr/bin/indent.pl
 /usr/bin/left.pl
 /usr/bin/leftblock.pl
+/usr/bin/makesig.pl
 /usr/bin/overlay.pl
 /usr/bin/right.pl
 /usr/bin/rightblock.pl
