@@ -1,6 +1,14 @@
 makesig.pl HISTORY
 
 
+v0.0.3  -  2000-10-14
+=====================
+
+- support of fortune files
+- warning mesages on errors in configuration blocks
+
+
+
 v0.0.2  -  2000-10-13  <<---  Friday 13th!
 =====================
 
