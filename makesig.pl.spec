@@ -9,6 +9,9 @@ Source: makesig.pl-0.0.1.tar.gz
 makesig.pl is a very flexible random signature generator for those who
 don't fear the power of the command line. It comes together with some
 tools to format your signature.
+
+__> examples/tools.sh geht nicht weil mit Pfaden!
+__> nicht den gesamten examples-Ordner in %doc übernehmen
  
 %prep
 %setup
@@ -16,18 +19,18 @@ tools to format your signature.
 
 %install
 cp makesig.pl /usr/bin/
-cp bottom.pl /usr/bin/
-cp eatlinefeed.pl /usr/bin/
-cp hcenter.pl /usr/bin/
-cp hcenterblock.pl /usr/bin/
-cp indent.pl /usr/bin/
-cp left.pl /usr/bin/
-cp leftblock.pl /usr/bin/
-cp overlay.pl /usr/bin/
-cp right.pl /usr/bin/
-cp rightblock.pl /usr/bin/
-cp top.pl /usr/bin/
-cp vcenter.pl /usr/bin/
+cp tools/bottom.pl /usr/bin/
+cp tools/eatlinefeed.pl /usr/bin/
+cp tools/hcenter.pl /usr/bin/
+cp tools/hcenterblock.pl /usr/bin/
+cp tools/indent.pl /usr/bin/
+cp tools/left.pl /usr/bin/
+cp tools/leftblock.pl /usr/bin/
+cp tools/overlay.pl /usr/bin/
+cp tools/right.pl /usr/bin/
+cp tools/rightblock.pl /usr/bin/
+cp tools/top.pl /usr/bin/
+cp tools/vcenter.pl /usr/bin/
 
 
 %files
