@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Revision: 1.3 $
+# $Revision: 1.3.4.1 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 # this script removes the final linefeed
@@ -42,7 +42,7 @@ sub eatit()
     
     open FILE, "$filename" or die "can't read \"$filename\": $!";
 
-    while ($line = <FILE>) {
+    while (my $line = <FILE>) {
 	if ($lastline) {
 	    print "$lastline\n";
 	}
