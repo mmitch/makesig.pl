@@ -1,0 +1,56 @@
+I cna tyep 400 Wrods pre miuet
+
+No space left in message for a signature.
+
+sigfault
+
+The feature you'd like to have is probably already installed
+on your Linux system.
+
+>Linux is not user-friendly.
+It _is_ user-friendly.  It is not ignorant-friendly and
+idiot-friendly.            (Seen somewhere on the net.)
+
+I found The Secret Of Monkey Island and all I got was this
+lousy T-Shirt!
+
+Hi! I'm Norton Antivirus. Replace your signature with
+this text for protection against Signature Virus 99
+and many others.
+
+New processes are created by other processes, just like new
+humans. New humans are created by other humans, of course,
+not by processes.     (Unix System Administration Handbook)
+
+With Perl you can manipulate text, interact with programs,
+talk over networks, drive Web pages, perform arbitrary
+precision arithmetic, and write programs that look like
+Snoopy swearing.
+     (Andrew Hunt, David Thomas: The Pragmatic Programmer)
+
+I have seen no evidence whatsoever that Microsoft's millions
+of dollars have enabled them to come up with a better product
+than MIT's few grad students.
+                         -- Paul D. Smith, on Windows vs. X11
+
+Quitting vi is the most important command of that editor,
+and should be bound to something easy to type and available
+in all modes, for example the space bar.  -- Per Abrahamsen
+
+The use of COBOL cripples the mind; its teaching should,
+therefore, be regarded as a criminal offence.
+-- Edsger W. Dijkstra
+
+If computers get too powerful, we can organize them into
+a committee.
+
+Ever wondered why your keyboard has so many keys? Use Emacs Gnus!
+
+Is your homepage Y2K compliant? Pipe it through "tr 'yY' 'kK'" to
+make sure.
+
+Real programmers don't comment...
+What was hard to write should be hard to read.
+
+We hope to extend GNU Emacs into a WYSIWYG desktop publishing
+system over the coming years.
