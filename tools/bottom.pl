@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Id: bottom.pl,v 1.2 2000-10-13 16:34:42 mitch Exp $
+# $Revision: 1.3 $
 #
 # 2000 (C) by Christian Garbs <mitch@uni.de>
 # aligns a text to the bottom
