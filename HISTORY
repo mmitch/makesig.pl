@@ -1,6 +1,13 @@
 makesig.pl HISTORY
 
 
+v0.0.8  -  2000-12-16
+=====================
+
+- makesig.pl can clip signatures to a specified width
+
+
+
 v0.0.7  -  2000-11-16
 =====================
 

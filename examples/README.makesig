@@ -1,5 +1,5 @@
 
-		  makesig.pl  v0.0.7  -  2000-11-16
+		  makesig.pl  v0.0.8  -  2000-12-16
 
 		 A random signature changer for those
 	    who don't fear the power of the command line.
@@ -43,6 +43,9 @@ otherfile=<filename>    This is like giving a signature file on the
 maxlines=<n>            Only signatures with equal or less than <n>
                         lines will be printed. Useful to keep your
                         signatures within the 4 lines maximum.
+
+maxcolumns=<n>          Only signatures with equal or less than <n>
+                        columns will be printed.
 
 sigdashes=<yes|no>      When set to yes, the chosen signature will be
                         prepended by "-- \n".
