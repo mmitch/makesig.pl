@@ -1,6 +1,14 @@
 makesig.pl HISTORY
 
 
+v0.0.6  -  2000-11-12
+=====================
+
+- BUGFIX: v0.0.5 contained a bug that would print out an entire
+          signature file as a signature
+
+
+
 v0.0.5  -  2000-11-10
 =====================
 

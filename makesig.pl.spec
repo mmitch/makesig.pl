@@ -1,11 +1,11 @@
 Summary: A very flexible random signature generator.
 Name: makesig.pl
-Version: 0.0.5
+Version: 0.0.6
 Release: 1
 Copyright: GPL
 Group: Utilities/Text
-Source: makesig.pl-0.0.5.tar.gz
-Patch: makesig.pl-0.0.5-1.rpmpatch.gz
+Source: makesig.pl-0.0.6.tar.gz
+Patch: makesig.pl-0.0.6-1.rpmpatch.gz
 %description
 makesig.pl is a very flexible random signature generator for those who
 don't fear the power of the command line. It comes together with some
