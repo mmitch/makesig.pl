@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Revision: 1.4 $
+# $Revision: 1.4.4.1 $
 #
 # NOTE:
 # These examples want the tools to be present in the $PATH
@@ -9,7 +9,7 @@
 # and now are in the examples directory.
 #
 
-PATH=../tools/:..:$PATH
+PATH="../tools/:..:$PATH"
 
 echo "This is a demonstration of the makesig.pl random signature generator."
 echo "Get your up-to-date copy at http://www.h.shuttle.de/mitch/makesig_pl.en.html"
